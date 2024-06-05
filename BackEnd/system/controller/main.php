@@ -8,7 +8,7 @@ header("Content-Type:application/json");
 header("Access-Control-Allow-Methods:POST,OPTIONS");
 
 
- use config\Req;
+use config\Req;
 use controller\HomeController;
 use controller\AdminController;
 use config\Exception;
@@ -46,10 +46,10 @@ if (Req::getReqMethod() === "POST") {
         RanglistController::{Req::getReqFun()}();
         $headerCode_Res =  RanglistController::$res->getStatus_code();
     }
-    elseif(method_exists(SupportController::class, Req::getReqFun())) {
-        SupportController::{Req::getReqFun()}();
-        $headerCode_Res =  SupportController::$res->getStatus_code();
-    }
+    // elseif(method_exists(SupportController::class, Req::getReqFun())) {
+    //     SupportController::{Req::getReqFun()}();
+    //     $headerCode_Res =  SupportController::$res->getStatus_code();
+    // }
     else {
         ThrowErrorController::ThrowError(array("err"=>true,"data"=>"No Valid Method"),HttpStatus::METHOD_NOT_ALLOWED);
     }

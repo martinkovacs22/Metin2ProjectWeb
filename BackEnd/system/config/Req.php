@@ -83,8 +83,9 @@ class Req
 	{
 
 		try {
-
-			return isset(explode("/", $_SERVER['REQUEST_URI'])[Req::$funNum]) ? explode("/", $_SERVER['REQUEST_URI'])[Req::$funNum] : "";
+			$lastString = explode("/",$_SERVER['REQUEST_URI'])[sizeof(explode("/", $_SERVER['REQUEST_URI']))-1];
+			
+			return isset($lastString) ? $lastString : "";
 
 		} catch (\Throwable $th) {
 
@@ -232,31 +233,31 @@ if (isset(Req::getReqBody()['file'])) {
 
 	Req::$fileData["size"] = Req::getReqBody()['file']['size'];
 
-	if (
+	// if (
 
-		Req::$fileData["name"] != null &&
+	// 	Req::$fileData["name"] != null &&
 
-		Req::$fileData["userID"] != null &&
+	// 	Req::$fileData["userID"] != null &&
 
-		Req::$fileData["url"] != null &&
+	// 	Req::$fileData["url"] != null &&
 
-		Req::$fileData["type"] != null &&
+	// 	Req::$fileData["type"] != null &&
 
-		Req::$fileData["extension"] != null &&
+	// 	Req::$fileData["extension"] != null &&
 
-		Req::$fileData["size"] != null
+	// 	Req::$fileData["size"] != null
 
-	) {
+	// ) {
 
-		file_put_contents(__DIR__ . "\\FILES\\" . Req::getReqBody()['file']['name'] . "(" . $num . ")" . "." . Req::$fileData["extension"], $File_Data);
+	// 	file_put_contents(__DIR__ . "\\FILES\\" . Req::getReqBody()['file']['name'] . "(" . $num . ")" . "." . Req::$fileData["extension"], $File_Data);
 
 
 
-		$dataFormDataBase = ModelR::CallProcedure(Req::$fileData, "createFile");
+	// 	$dataFormDataBase = ModelR::CallProcedure(Req::$fileData, "createFile");
 
-		Req::$fileData =  $dataFormDataBase["data"][0];
+	// 	Req::$fileData =  $dataFormDataBase["data"][0];
 
-	}
+	// }
 
 }
 
