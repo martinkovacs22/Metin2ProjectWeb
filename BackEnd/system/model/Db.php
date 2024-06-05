@@ -2,6 +2,7 @@
 
 namespace model;
 require_once __DIR__ . '/../../Autoloader.php';
+use config\Exception;
     class Db{
         public static function connectToDatabasePDO($dbName, $dbUser, $dbPass, $dbHost = 'mysql.rackhost.hu') {
             
@@ -35,7 +36,10 @@ require_once __DIR__ . '/../../Autoloader.php';
             return array("err" => false, "data" => $resultSet);
 
             } catch (\Throwable $th) {
-                return array("err" => true, "data" => $th->getMessage());
+                
+
+                Exception::msg(array("err" => true, "data" => $th->getMessage()));
+       
             }
         }
 
