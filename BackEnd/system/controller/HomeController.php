@@ -14,9 +14,9 @@ use service\HomeService;
 
 class HomeController{
     public static Res $res;
-     public static function getAllPlayer(){
+     public static function getAllAccount(){
       self::$res = new Res();
-      $serviceData = HomeService::getAllPlayer();
+      $serviceData = HomeService::getAllAccount();
       self::$res->setBody($serviceData);
       $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
       self::$res->send();

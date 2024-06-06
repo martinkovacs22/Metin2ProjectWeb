@@ -9,9 +9,9 @@ use config\Exception;
 
 class HomeService
 {
-    public static function getAllPlayer():array{
+    public static function getAllAccount():array{
         
-        return ModelR::CallProcedure(array(),"getAllPlayer","account");
+        return ModelR::CallProcedure(array(),"getAllAccount","account");
         
     } 
     public static function getAllCharacter():array{

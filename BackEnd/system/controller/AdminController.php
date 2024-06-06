@@ -28,9 +28,9 @@ class AdminController{
       $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
       self::$res->send();
      }
-     public static function getAllAccountWithAllData(){
+     public static function getAccountWithAllData(){
       self::$res = new Res();
-      $serviceData = AdminService::getAllAccountWithAllData();
+      $serviceData = AdminService::getAccountWithAllData(Req::getReqBody());
       self::$res->setBody($serviceData);
       $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
       self::$res->send();
@@ -38,27 +38,6 @@ class AdminController{
      public static function searchAccount(){
       self::$res = new Res();
       $serviceData = AdminService::searchAccount(Req::getReqBody());
-      self::$res->setBody($serviceData);
-      $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
-      self::$res->send();
-     }
-     public static function getAllPlayerWithAllData(){
-      self::$res = new Res();
-      $serviceData = AdminService::getAllPlayerWithAllData();
-      self::$res->setBody($serviceData);
-      $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
-      self::$res->send();
-     }
-     public static function searchPlayer(){
-      self::$res = new Res();
-      $serviceData = AdminService::searchPlayer(Req::getReqBody());
-      self::$res->setBody($serviceData);
-      $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
-      self::$res->send();
-     }
-     public static function search(){
-      self::$res = new Res();
-      $serviceData = AdminService::search(Req::getReqBody());
       self::$res->setBody($serviceData);
       $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::UNAUTHORIZED) : self::$res->setStatus_code(HttpStatus::OK);
       self::$res->send();

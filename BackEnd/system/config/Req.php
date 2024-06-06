@@ -6,14 +6,6 @@ namespace config;
 
 
 
-
-
-
-
-
-
-use model\ModelR;
-
 require_once __DIR__ . '/../../Autoloader.php';
 
 class Req

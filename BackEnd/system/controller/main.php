@@ -16,6 +16,7 @@ use config\HttpStatus;
 use controller\SignController;
 use controller\ThrowErrorController;
 use controller\RanglistController;
+use controller\LanguageController;
 use controller\SupportController;
 use config\Base_Reg_Setting;
  require_once __DIR__ . '/../../Autoloader.php';
@@ -46,6 +47,10 @@ if (Req::getReqMethod() === "POST") {
     elseif(method_exists(RanglistController::class, Req::getReqFun())) {
         RanglistController::{Req::getReqFun()}();
         $headerCode_Res =  RanglistController::$res->getStatus_code();
+    }
+    elseif(method_exists(LanguageController::class, Req::getReqFun())) {
+        LanguageController::{Req::getReqFun()}();
+        $headerCode_Res =  LanguageController::$res->getStatus_code();
     }
     // elseif(method_exists(SupportController::class, Req::getReqFun())) {
     //     SupportController::{Req::getReqFun()}();

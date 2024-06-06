@@ -31,73 +31,21 @@ class AdminService
         }
         return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
     }
-    public static function getAllAccountWithAllData(): array
+    public static function getAccountWithAllData(array $body): array
     {
         $jwtValid = JWThandler::verifyJWT(Req::getReqToken());
         if (isset($jwtValid["data"][0]["id"])) {
-            $data = ModelR::CallProcedure(array("id" => $jwtValid["data"][0]["id"]), "getAllAccountWithAllData", "account");
+            $data = ModelR::CallProcedure(array("id" => $body["id"],"adminId"=>$jwtValid["data"][0]["id"]), "getAccountWithAllData", "common");
             return $data;
         }
         return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
     }
-    public static function searchAccount($body): array
+    public static function searchAccount(array $body): array
     {
         $jwtValid = JWThandler::verifyJWT(Req::getReqToken());
         if (isset($jwtValid["data"][0]["id"])) {
 
-            $data = ModelR::CallProcedure(array("id" => $body["propt"], "type" => $body["type"]), "searchAccount", "account");
-            return $data;
-        }
-        return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
-    }
-    public static function getAllPlayerWithAllData(): array
-    {
-        $jwtValid = JWThandler::verifyJWT(Req::getReqToken());
-        if (isset($jwtValid["data"][0]["id"])) {
-            $data = ModelR::CallProcedure(array("id" => $jwtValid["data"][0]["id"]), "getAllPlayerWithAllData", "player");
-            return $data;
-        }
-        return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
-    }
-    public static function searchPlayer($body): array
-    {
-        $jwtValid = JWThandler::verifyJWT(Req::getReqToken());
-        if (isset($jwtValid["data"][0]["id"])) {
-
-            $data = ModelR::CallProcedure(array("id" => $body["propt"], "type" => $body["type"]), "searchPlayer", "player");
-            return $data;
-        }
-        return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
-    }
-    public static function search($body): array
-    {
-        $jwtValid = JWThandler::verifyJWT(Req::getReqToken());
-
-        
-
-        if (
-            isset($jwtValid["data"][0]["id"])
-            && isset($body["inputText"])
-            && isset($body["isAccount"])
-            && isset($body["isCharacter"])
-            && isset($body["isEmail"])
-            && isset($body["isId"])
-            && isset($body["isPontos"])
-            && isset($body["name"])
-            && isset($body["ip"])
-        ) {
-
-            $data = ModelR::CallProcedure(array(
-                "id"=>$jwtValid["data"][0]["id"],
-                "inputText" => $body["inputText"],
-                "isAccount" => $body["isAccount"],
-                "isCharacter" => $body["isCharacter"],
-                "isEmail" => $body["isEmail"],
-                "isId" => $body["isId"],
-                "isPontos" => $body["isPontos"],
-                "name" => $body["name"],
-                "ip" => $body["ip"]
-            ), "search", "account");
+            $data = ModelR::CallProcedure(array("accountId"=> $jwtValid["data"][0]["id"] ,  "prompt"=>$body["prompt"],"type" => $body["type"]), "searchAccount", "common");
             return $data;
         }
         return array("err" => true, "data" => "Nem tartalmaz megfelelő Adatot");
