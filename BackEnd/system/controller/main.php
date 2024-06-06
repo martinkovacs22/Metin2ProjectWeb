@@ -17,6 +17,7 @@ use controller\SignController;
 use controller\ThrowErrorController;
 use controller\RanglistController;
 use controller\SupportController;
+use config\Base_Reg_Setting;
  require_once __DIR__ . '/../../Autoloader.php';
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -80,6 +81,9 @@ if (Req::getReqMethod() === "POST") {
         $body["password"] = isset($body["password"])? hash("sha256", $body["password"]):false;
         $data = date('Y-m-d H:i:s') . " - " . json_encode($body) ."/ip : ".Req::getIP(). " / route : ". Req::getReqFun(). " / Status : {$headerCode_Res}" . "\n";
         file_put_contents($logFile, $data, FILE_APPEND | LOCK_EX);
+        $baseReg = new Base_Reg_Setting();
+
+        print_r($baseReg->convertToArray());
         // echo"fds";
     //Exception::msg(array("err" => true, "data" => Req::getReqMethod() . " not found."));
 }

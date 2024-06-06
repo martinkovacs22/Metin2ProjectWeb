@@ -109,7 +109,7 @@ class Req
 		$token = null;
 
 		$token = isset(getallheaders()["token"]) ? getallheaders()["token"] : null;
-		$token = isset(getallheaders()["Token"]) && $token == null ? getallheaders()["Token"] : null;
+		// $token = isset(getallheaders()["Token"]) ? getallheaders()["Token"] : null;
 		return $token;
 	}
 

@@ -13,47 +13,16 @@ use Error;
 
 class SignService
 {
-  public static function signUp(array $body): array
+  public static function signUp(array $body)
   {
-    if (
-      isset($body["login"]) &&
-      isset($body["email"]) &&
-      isset($body["socialId"]) &&
-      isset($body["password"])
-    ) {
-      // Ellenőrizd a login hosszát
-      if (strlen($body["login"]) < 5) {
-        Exception::msg(array("err" => true, "data" => "username"), HttpStatus::UNAUTHORIZED);
-      }
+   
+    
 
-      // Ellenőrizd az email cím formátumát
-      if (!filter_var($body["email"], FILTER_VALIDATE_EMAIL)) {
-        Exception::msg(array("err" => true, "data" => "email"), HttpStatus::UNAUTHORIZED);
-      }
-
-      // Ellenőrizd a jelszó hosszát és komplexitását
-      $password = $body["password"];
-      if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password)) {
-        Exception::msg(array("err" => true, "data" => "password"), HttpStatus::UNAUTHORIZED);
-      }
-
-      // Ha minden rendben van, hajtsd végre a regisztrációt
-
-      return ModelR::CallProcedure(array(
-        "login" => $body["login"],
-        "email" => $body["email"],
-        "socialId" => $body["socialId"],
-        "password" =>  $password
-      ), "signUp", "account");
-    } else {
-      return array("err" => true, "data" => "Nincs elég adat.");
-    }
   }
-  public static function verifyLogin(): array
+  public static function verifyLogin()
 {
     try {
         $oldJwt = JWThandler::verifyJWT(Req::getReqToken());
-
         if (isset($oldJwt["data"][0]["id"])) {
             $newJwt = JWThandler::generateJWT($oldJwt["data"]);
             return array("err" => false, "jwt" => $newJwt);
@@ -61,11 +30,11 @@ class SignService
 
         throw new \RuntimeException("Nem jó a verify: hiányzik az 'id' kulcs az adatokban.");
     } catch (\Throwable $th) {
-        return array("err" => true, "jwt" => null);
+        return array("err" => true, "jwt" => null,"data"=>$th->getMessage());
     }
 }
 
-  public static function login(array $body): array
+  public static function login(array $body)
   {
 
     if (
@@ -107,7 +76,7 @@ class SignService
     }
   }
 
-  public static function logout(): array{
+  public static function logout(){
     date_default_timezone_set('Europe/Budapest'); // Helyi időzóna beállítása
 
     $tokenValue = JWThandler::verifyJWT(Req::getReqToken());
