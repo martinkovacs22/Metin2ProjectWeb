@@ -8,6 +8,7 @@ use model\ModelR;
 use config\Exception;
 use config\HttpStatus;
 use config\JWThandler;
+use config\Base_Reg_Setting;
 use config\Req;
 use Error;
 
@@ -16,7 +17,41 @@ class SignService
   public static function signUp(array $body)
   {
    
-    
+if(isset($body["login"])&&    
+isset($body["password"])&&
+isset($body["real_name"])&&
+isset($body["social_id"])&&
+isset($body["email"])&&
+isset($body["phone1"])&&
+isset($body["address"])&&
+isset($body["zipcode"])&&
+isset($body["language"])){
+
+  $baseRegSettingClass = new Base_Reg_Setting();
+
+ 
+  $model =  ModelR::CallProcedure(array(
+"login"=>$body["login"],
+"password"=>$body["password"],
+"real_name"=>$body["real_name"],
+"social_id"=>$body["social_id"],
+"email"=>$body["email"],
+"phone1"=>$body["phone1"],
+"address"=>$body["address"],
+"zipcode"=>$body["zipcode"],
+"language"=>$body["language"],
+"base_cash"=>$baseRegSettingClass->getbaseCash(),
+"base_gold_expire"=>$baseRegSettingClass->getbaseGold(),
+"base_silver_expire"=>$baseRegSettingClass->getbaseSilver(),
+"base_safebox_expire"=>$baseRegSettingClass->getbaseSafeBox(),
+"base_autoloot_expire"=>$baseRegSettingClass->getbaseAutoLoot(),
+"base_fish_mind_expire"=>$baseRegSettingClass->getbaseFish(),
+"base_money_drop_rate_expire"=>$baseRegSettingClass->getbaseMoney()
+  ), "signup", "account");
+return $model;
+}else{
+  Exception::msg(array("err"=>true,"data"=>"Valamit nem talált meg"));
+}
 
   }
   public static function verifyLogin()
@@ -38,11 +73,11 @@ class SignService
   {
 
     if (
-      isset($body["login"]) &&
+      isset($body["loginAndEmail"]) &&
       isset($body["password"])
     ) {
       // Ellenőrizd a login hosszát
-      if (strlen($body["login"]) < 5) {
+      if (strlen($body["loginAndEmail"]) < 5) {
         Exception::msg(array("err" => true, "data" => "username"), HttpStatus::FORBIDDEN);
       }
       // Ellenőrizd a jelszó hosszát és komplexitását
@@ -53,7 +88,7 @@ class SignService
 
       // Ha minden rendben van, hajtsd végre a regisztrációt
       $model =  ModelR::CallProcedure(array(
-        "login" => $body["login"],
+        "loginAndEmail" => $body["loginAndEmail"],
         "password" =>  $body["password"]
       ), "login", "account");
       //print_r($model);

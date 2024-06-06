@@ -21,7 +21,7 @@ class LanguageController
     {
 
 
-        LanguageController::$componens = json_decode(file_get_contents(__DIR__ . "/LanguageController.json"), true);
+        LanguageController::$componens = json_decode(file_get_contents(__DIR__ . "/jsons/LanguageController.json"), true);
     }
 
 
