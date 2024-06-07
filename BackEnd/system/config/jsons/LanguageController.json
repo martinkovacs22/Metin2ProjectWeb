@@ -1,59 +1,68 @@
-
 {
-    "eng":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "eng": {
+        "phpSignup": ["SignUP", "username", "password", "password", "email", "full name", "social id", "phone number", "address", "zipcode", "Submit"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "por":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "por": {
+        "phpSignup": ["Inscrever-se", "nome de usuário", "senha", "senha", "e-mail", "nome completo", "identificação social", "número de telefone", "endereço", "código postal", "Enviar"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "spa":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "spa": {
+        "phpSignup": ["Registrarse", "nombre de usuario", "contraseña", "contraseña", "correo electrónico", "nombre completo", "identificación social", "número de teléfono", "dirección", "código postal", "Enviar"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "fre":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "fra": {
+        "phpSignup": ["S'inscrire", "nom d'utilisateur", "mot de passe", "mot de passe", "e-mail", "nom complet", "identifiant social", "numéro de téléphone", "adresse", "code postal", "Soumettre"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "ger":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "ger": {
+        "phpSignup": ["Anmelden", "Benutzername", "Passwort", "Passwort", "E-Mail", "voller Name", "soziale ID", "Telefonnummer", "Adresse", "Postleitzahl", "Einreichen"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "rom":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "rom": {
+        "phpSignup": ["Înregistrare", "nume de utilizator", "parolă", "parolă", "e-mail", "nume complet", "ID social", "număr de telefon", "adresă", "cod poștal", "Trimite"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "pol":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "pol": {
+        "phpSignup": ["Zarejestruj się", "nazwa użytkownika", "hasło", "hasło", "e-mail", "pełne imię i nazwisko", "identyfikator społeczny", "numer telefonu", "adres", "kod pocztowy", "Prześlij"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "ita":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "ita": {
+        "phpSignup": ["Iscriviti", "nome utente", "password", "password", "e-mail", "nome completo", "ID sociale", "numero di telefono", "indirizzo", "codice postale", "Invia"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "cze":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "cze": {
+        "phpSignup": ["Zaregistrovat se", "uživatelské jméno", "heslo", "heslo", "e-mail", "celé jméno", "sociální ID", "telefonní číslo", "adresa", "PSČ", "Odeslat"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     },
-    "hun":{
-        "navbar":["föoldal"],
-        "home":[],
-        "sign":[]
+    "hun": {
+        "phpSignup": ["Regisztráció", "felhasználónév", "jelszó", "jelszó", "e-mail", "teljes név", "társadalmi azonosító", "telefonszám", "cím", "irányítószám", "Küldés"],
+        "navbar": ["föoldal"],
+        "home": [],
+        "sign": []
     },
-    "tur":{
-        "navbar":["home"],
-        "home":[],
-        "sign":[]
+    "tur": {
+        "phpSignup": ["Kayıt ol", "kullanıcı adı", "şifre", "şifre", "e-posta", "tam ad", "sosyal kimlik", "telefon numarası", "adres", "posta kodu", "Gönder"],
+        "navbar": ["home"],
+        "home": [],
+        "sign": []
     }
-
 }

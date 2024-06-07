@@ -3,9 +3,9 @@ session_start();
 header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Headers:Content-Type,Authorization,X-Requested-With,token");
 header("Access-Control-Max-Age:86400");
-header("Access-Control-Allow-Credentials:true");
-header("Content-Type:application/json");
-header("Access-Control-Allow-Methods:POST,OPTIONS");
+#header("Access-Control-Allow-Credentials:true");
+
+header("Access-Control-Allow-Methods:GET,POST,OPTIONS");
 
 
 use config\Req;
@@ -19,36 +19,33 @@ use controller\RanglistController;
 use controller\LanguageController;
 use controller\SupportController;
 use config\Base_Reg_Setting;
- require_once __DIR__ . '/../../Autoloader.php';
+
+require_once __DIR__ . '/../../Autoloader.php';
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
 Req::CONFIG_OPTIMALIZATION();
-  $logFile = __DIR__ . '/../../change_log.txt';
+$logFile = __DIR__ . '/../../change_log.txt';
 
-    $headerCode_Res;
+$headerCode_Res;
 
 if (Req::getReqMethod() === "POST") {
-
-   if(method_exists(SignController::class, Req::getReqFun())) {
+    header("Content-Type:application/json");
+    if (method_exists(SignController::class, Req::getReqFun())) {
         SignController::{Req::getReqFun()}();
         $headerCode_Res =  SignController::$res->getStatus_code();
-    }
-    elseif(method_exists(HomeController::class, Req::getReqFun())) {
+    } elseif (method_exists(HomeController::class, Req::getReqFun())) {
         HomeController::{Req::getReqFun()}();
         $headerCode_Res =  HomeController::$res->getStatus_code();
-    }
-    elseif(method_exists(AdminController::class, Req::getReqFun())) {
+    } elseif (method_exists(AdminController::class, Req::getReqFun())) {
         AdminController::{Req::getReqFun()}();
         $headerCode_Res =  AdminController::$res->getStatus_code();
-    }
-    elseif(method_exists(RanglistController::class, Req::getReqFun())) {
+    } elseif (method_exists(RanglistController::class, Req::getReqFun())) {
         RanglistController::{Req::getReqFun()}();
         $headerCode_Res =  RanglistController::$res->getStatus_code();
-    }
-    elseif(method_exists(LanguageController::class, Req::getReqFun())) {
+    } elseif (method_exists(LanguageController::class, Req::getReqFun())) {
         LanguageController::{Req::getReqFun()}();
         $headerCode_Res =  LanguageController::$res->getStatus_code();
     }
@@ -57,7 +54,7 @@ if (Req::getReqMethod() === "POST") {
     //     $headerCode_Res =  SupportController::$res->getStatus_code();
     // }
     else {
-        ThrowErrorController::ThrowError(array("err"=>true,"data"=>"No Valid Method"),HttpStatus::METHOD_NOT_ALLOWED);
+        ThrowErrorController::ThrowError(array("err" => true, "data" => "No Valid Method"), HttpStatus::METHOD_NOT_ALLOWED);
     }
     if (!file_exists($logFile)) {
         touch($logFile);
@@ -67,12 +64,47 @@ if (Req::getReqMethod() === "POST") {
     if (!empty(Req::getReqBody())) {
         $body = Req::getReqBody();
 
-        $body["password"] = isset($body["password"])? hash("sha256", $body["password"]):false;
-        $data = date('Y-m-d H:i:s') . " - " . json_encode($body) ."/ip : ".Req::getIP(). " / route : ". Req::getReqFun(). " / Status : {$headerCode_Res}" . "\n";
+        $body["password"] = isset($body["password"]) ? hash("sha256", $body["password"]) : false;
+        $data = date('Y-m-d H:i:s') . " - " . json_encode($body) . "/ip : " . Req::getIP() . " / route : " . Req::getReqFun() . " / Status : {$headerCode_Res}" . "\n";
         file_put_contents($logFile, $data, FILE_APPEND | LOCK_EX);
         // echo"fds";
     }
-}else {
+} else if (Req::getReqMethod() === "GET") {
+    if ((explode(".", Req::getReqFun())[1] == "png" || explode(".", Req::getReqFun())[1] == "jpg") && file_exists(__DIR__ . "/../img/buttons/" . Req::getReqFun())) {
+        header('Content-type:image/' . explode(".", Req::getReqFun())[1]);
+        readfile(__DIR__ . "/../img/buttons/" . Req::getReqFun());
+    } else {
+        if (file_exists(__DIR__ . '/html/' . Req::getReqFun() . '.html')) {
+            header('Content-Type: text/html; charset=utf-8');
+            $doc = new DOMDocument();
+            $doc->loadHTML(file_get_contents(__DIR__ . '/html/' . Req::getReqFun() . '.html'));
+            echo $doc->saveHTML();
+        } else if (file_exists(__DIR__ . '/js/' . Req::getReqFun() . '.js')) {
+            // Megfelelő HTTP fejléc beállítása a JavaScript típushoz
+            header('Content-Type: application/javascript');
+
+            // JavaScript fájl tartalmának közvetlen kimenetre írása
+            readfile(__DIR__ . '/js/' . Req::getReqFun() . '.js');
+         
+        } else if (file_exists(__DIR__ . '/css/' . Req::getReqFun() . '.css')) {
+            header('Content-Type: text/css');
+
+            // CSS fájl tartalmának közvetlen kimenetre írása
+            readfile(__DIR__ . '/css/' . Req::getReqFun() . '.css');
+        } else if ((Req::getReqFun() == "main.php" || Req::getReqFun() == "main" || Req::getReqFun() == "") && file_exists(__DIR__ . '/html/baseSideHTML.html')) {
+
+            $doc = new DOMDocument();
+            $doc->loadHTML(file_get_contents(__DIR__ . '/html/baseSideHTML.html'));
+            echo $doc->saveHTML();
+        } else {
+            echo(Req::getReqFun());
+            $doc = new DOMDocument();
+            $doc->loadHTML(file_get_contents(__DIR__ . '/html/404.html'));
+            echo $doc->saveHTML();
+        }
+    }
+} else {
+    header("Content-Type:application/json");
     $logFile = __DIR__ . '/../../change_log.txt';
 
     $headerCode_Res = 404;
@@ -81,14 +113,14 @@ if (Req::getReqMethod() === "POST") {
         chmod($logFile, 0666);
     }
     // print_r($headerCode_Res);
-        $body = Req::getReqBody();
+    $body = Req::getReqBody();
 
-        $body["password"] = isset($body["password"])? hash("sha256", $body["password"]):false;
-        $data = date('Y-m-d H:i:s') . " - " . json_encode($body) ."/ip : ".Req::getIP(). " / route : ". Req::getReqFun(). " / Status : {$headerCode_Res}" . "\n";
-        file_put_contents($logFile, $data, FILE_APPEND | LOCK_EX);
-        $baseReg = new Base_Reg_Setting();
+    $body["password"] = isset($body["password"]) ? hash("sha256", $body["password"]) : false;
+    $data = date('Y-m-d H:i:s') . " - " . json_encode($body) . "/ip : " . Req::getIP() . " / route : " . Req::getReqFun() . " / Status : {$headerCode_Res}" . "\n";
+    file_put_contents($logFile, $data, FILE_APPEND | LOCK_EX);
+    $baseReg = new Base_Reg_Setting();
 
-        print_r($baseReg->convertToArray());
-        // echo"fds";
+    print_r($baseReg->convertToArray());
+    // echo"fds";
     //Exception::msg(array("err" => true, "data" => Req::getReqMethod() . " not found."));
 }
