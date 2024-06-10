@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import dataHandler from "./../config/http.js";
+import React, { useEffect, useState } from "react";
+import dataHandler from "./http.js";
 
 function replaceTextRecursively(element, from, to) {
     if (!element) return;
@@ -15,13 +15,26 @@ function replaceTextRecursively(element, from, to) {
 }
 
 const Transformation = ({ to, components }) => {
+    const [isSetLanguage, setIsSetLanguage] = useState(false);
+
     useEffect(() => {
         const body = document.body;
-        const from = localStorage.getItem("language") || "eng";
+        const initialLanguage = localStorage.getItem("language") || "eng";
+        const baseLanguage = localStorage.getItem("baseLanguage") || "eng";
 
-        const state = { from, to, components };
+        localStorage.setItem("baseLanguage", "eng");
+
+        let fromLanguage = isSetLanguage ? initialLanguage : baseLanguage;
+
+        const state = { from: fromLanguage, to: to, components: components };
         console.log(state);
+
         dataHandler.postDataAndHandle("change", state).then(res => {
+            console.log(res);
+            if (!res.err) {
+                localStorage.setItem("language", to);
+                setIsSetLanguage(true);
+            }
             components.forEach(component => {
                 replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
             });
@@ -33,7 +46,7 @@ const Transformation = ({ to, components }) => {
         return () => {
             // Do any cleanup if necessary
         };
-    }, [to, components]);
+    }, [to, components, isSetLanguage,localStorage.getItem("language")]);
 
     return null; // As it does not render anything
 };
