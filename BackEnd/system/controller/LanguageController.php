@@ -16,12 +16,12 @@ class LanguageController{
         self::$res = new Res();
         $from = Req::getReqBody()["from"];
         $to = Req::getReqBody()["to"];
-        $componens = Req::getReqBody()["componens"];
+        $components = Req::getReqBody()["components"];
 
         $languageJsonController = Language::getInc();
         
 
-        $change = $languageJsonController->change($from,$to,$componens);
+        $change = $languageJsonController->change($from,$to,$components);
         $change["err"] ? self::$res->setStatus_code(HttpStatus::NOT_FOUND) : self::$res->setStatus_code(HttpStatus::OK);
         self::$res->setBody($change);
         self::$res->send();
