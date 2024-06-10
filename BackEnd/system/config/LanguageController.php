@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../Autoloader.php';
 class LanguageController
 {
 
-    private static array|null $componens = null;
+    private static array|null $components = null;
 
     private static $inc = null;
 
@@ -21,24 +21,24 @@ class LanguageController
     {
 
 
-        LanguageController::$componens = json_decode(file_get_contents(__DIR__ . "/jsons/LanguageController.json"), true);
+        LanguageController::$components = json_decode(file_get_contents(__DIR__ . "/jsons/LanguageController.json"), true);
     }
 
 
-    public static function change(string $from, string $to, array $componens)
+    public static function change(string $from, string $to, array $components)
     {
 
         $array  = [];
 
-if (array_key_exists($to,LanguageController::$componens) && 
-array_key_exists($from,LanguageController::$componens) ){ 
+if (array_key_exists($to,LanguageController::$components) && 
+array_key_exists($from,LanguageController::$components) ){ 
 
-        foreach ($componens as $value) {
-            if(array_key_exists($value,LanguageController::$componens[$from]) ){
-                $array["from"][$value] = LanguageController::$componens[$from][$value];
-                $array["to"][$value] = LanguageController::$componens[$to][$value];
+        foreach ($components as $value) {
+            if(array_key_exists($value,LanguageController::$components[$from]) ){
+                $array["from"][$value] = LanguageController::$components[$from][$value];
+                $array["to"][$value] = LanguageController::$components[$to][$value];
             }else{
-                Exception::msg(array("err"=>true,"data"=>"nem találta meg a program a componenst"));
+                Exception::msg(array("err"=>true,"data"=>"nem találta meg a program a componentst"));
             }
         }
 
