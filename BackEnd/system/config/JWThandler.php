@@ -17,11 +17,11 @@ class JWThandler{
     // JWT generálása a kapott felhasználói adatok alapján
     public static function generateJWT($userData) {
         $currentTime = time();
-        // $expirationTime = $currentTime + 3600;
+        $expirationTime = $currentTime + 3600;
 
         $payload = array(
             "data" => $userData,
-            // "exp" => $expirationTime
+            "exp" => $expirationTime
         );
 
         $token = JWT::encode($payload, self::$secret, 'HS256');
