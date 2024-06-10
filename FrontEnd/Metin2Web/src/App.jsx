@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import React from "react";
+import Transformation from "./transformation/transformation.jsx";
+import Home from "./home/index.jsx";
 
-import Home from "./home/index.jsx"
 function App() {
-
   return (
     <>
-     <Home/>
+      <Home />
+      <Transformation to={"hun"} components={["navbar"]} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
