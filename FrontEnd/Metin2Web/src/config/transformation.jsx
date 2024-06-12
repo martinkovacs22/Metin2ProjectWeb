@@ -24,6 +24,25 @@ const Transformation = ({ to, components }) => {
 
         const baseLanguage = localStorage.getItem("baseLanguage") || "eng";
 
+        if (baseLanguage !== localStorage.getItem("language")) {
+            const state = { from: "eng", to: to, components: components };
+            dataHandler.postDataAndHandle("change", state).then(res => {
+                console.log(res);
+                if (!res.err) {
+                    setInitialLanguage(to)
+                    localStorage.setItem("language",to)
+                    if (!isSetLanguage) {
+                        setIsSetLanguage(true);
+                    }
+                    
+                }
+                components.forEach(component => {
+                    replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        }
         
 
         let fromLanguage = isSetLanguage || (initialLanguage !== localStorage.getItem("language")) ? initialLanguage : baseLanguage;

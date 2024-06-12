@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from "react";
+import dataHandler from "../../config/http";
 
 export default function SideNavbar({addComponentToTransformation,sideN}) {
     const [isOpen,setIsOpen] = useState(false);
@@ -7,6 +8,11 @@ export default function SideNavbar({addComponentToTransformation,sideN}) {
     
     useEffect(()=>{
         addComponentToTransformation({adderComponents:["phpSignup"]});
+        dataHandler.postDataAndHandle("getAllLanguage",{}).then(res=>{
+            setAllLanguage(res.data)
+        }).catch(err=>{
+            console.log(err);
+        })
     },[])
     useEffect(()=>{
         if (!isOpen && isOpenLanguage) {
@@ -41,7 +47,7 @@ export default function SideNavbar({addComponentToTransformation,sideN}) {
                         <div>{isOpen ?<img className="rotate-90 w-[2vw] rounded-full border-2 border-spacing border-red-500" src="https://finombanan.v4y.hu/arrowRight.png" />:""}</div>
                         
                     </div>
-                        <div className={`top-[25vh] absolute h-auto bg-red-400  ${isOpen ? 'w-[26vw]' : 'w-[6vw]'} ${isOpenLanguage?`grid grid-cols-1`:`hidden`}`}> 
+                        <div className={`top-[25vh] absolute h-auto bg-red-400 overflow-auto  max-h-[40vh] ${isOpen ? 'w-[26vw]' : 'w-[6vw]'} ${isOpenLanguage?`grid grid-cols-1`:`hidden`}`}> 
                             {Array.isArray(allLanguage) && allLanguage.map((item,index)=>{
                                 
                                 return(<div className={`hover:bg-red-300 h-[10vh] flex justify-center items-center ${isOpen ? 'w-[26vw]' : 'w-[6vw]'}`} onClick={()=>{handlerLanguageChange({language:item})}} >
