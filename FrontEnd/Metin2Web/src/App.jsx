@@ -10,6 +10,7 @@ import "./base.css";
 function App() {
   const [components, setComponents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [language, setLanguage] = useState(localStorage.getItem("language") || "eng");
 
   useEffect(() => {
     const handleLoad = () => {
@@ -21,7 +22,12 @@ function App() {
     return () => {
       window.removeEventListener("load", handleLoad);
     };
-  }, []);
+  }, [language]);
+
+  const handlerLanguage =({language})=>{
+    setLanguage(language)
+
+  }
 
   const addComponentToTransformation = ({ adderComponents }) => {
     if (Array.isArray(adderComponents)) {
@@ -38,13 +44,13 @@ function App() {
       <Router>
 
 <Routes>
-    <Route exact path='/' element={ <Home addComponentToTransformation={addComponentToTransformation} />}></Route>
+    <Route exact path='/' element={ <Home addComponentToTransformation={addComponentToTransformation} sideN={handlerLanguage} />}></Route>
     <Route path="*" element={<NF addComponentToTransformation={addComponentToTransformation}></NF>}></Route>
 </Routes>
 
 </Router>
          
-          <Transformation to={"hun"} components={components} />
+          <Transformation to={language} components={components} />
      
  
     </div>

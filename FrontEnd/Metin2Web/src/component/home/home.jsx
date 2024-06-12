@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import SideNavbar from "../SideNavbar/sideNavbar.jsx"
 
-export default function Home({addComponentToTransformation}) {
+export default function Home({addComponentToTransformation,sideN}) {
     
     useEffect(()=>{
         console.log("HOME");
@@ -10,7 +10,7 @@ export default function Home({addComponentToTransformation}) {
     },[])
 
     return(<div>
-        <SideNavbar addComponentToTransformation={addComponentToTransformation}/>
+        <SideNavbar addComponentToTransformation={addComponentToTransformation} sideN={sideN}/>
         
     </div>)
 

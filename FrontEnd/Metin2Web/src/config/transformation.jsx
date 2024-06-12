@@ -16,15 +16,17 @@ function replaceTextRecursively(element, from, to) {
 
 const Transformation = ({ to, components }) => {
     const [isSetLanguage, setIsSetLanguage] = useState(false);
-
+    const [initialLanguage, setInitialLanguage] = useState("eng");
+    
     useEffect(() => {
         const body = document.body;
-        const initialLanguage = localStorage.getItem("language") || "eng";
-        const baseLanguage = localStorage.getItem("baseLanguage") || "eng";
-
         localStorage.setItem("baseLanguage", "eng");
 
-        let fromLanguage = isSetLanguage ? initialLanguage : baseLanguage;
+        const baseLanguage = localStorage.getItem("baseLanguage") || "eng";
+
+        
+
+        let fromLanguage = isSetLanguage && (initialLanguage !== localStorage.getItem("language")) ? initialLanguage : baseLanguage;
 
         const state = { from: fromLanguage, to: to, components: components };
         console.log(state);
@@ -32,8 +34,12 @@ const Transformation = ({ to, components }) => {
         dataHandler.postDataAndHandle("change", state).then(res => {
             console.log(res);
             if (!res.err) {
-                localStorage.setItem("language", to);
-                setIsSetLanguage(true);
+                setInitialLanguage(to)
+                localStorage.setItem("language",to)
+                if (!isSetLanguage) {
+                    setIsSetLanguage(true);
+                }
+                
             }
             components.forEach(component => {
                 replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
