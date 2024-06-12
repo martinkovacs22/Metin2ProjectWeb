@@ -26,7 +26,7 @@ const Transformation = ({ to, components }) => {
 
         
 
-        let fromLanguage = isSetLanguage && (initialLanguage !== localStorage.getItem("language")) ? initialLanguage : baseLanguage;
+        let fromLanguage = isSetLanguage || (initialLanguage !== localStorage.getItem("language")) ? initialLanguage : baseLanguage;
 
         const state = { from: fromLanguage, to: to, components: components };
         console.log(state);
