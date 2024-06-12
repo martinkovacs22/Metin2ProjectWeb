@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Transformation from "./config/transformation.jsx";
-import Home from "./home/home.jsx";
+import Home from "./component/home/home.jsx";
+import NF from "./component/404NF/404NF.jsx"
+
 import "./index.css";
 import "./base.css";
 
@@ -32,8 +35,15 @@ function App() {
 
   return (
     <div >
-      
-          <Home addComponentToTransformation={addComponentToTransformation} />
+      <Router>
+
+<Routes>
+    <Route exact path='/' element={ <Home addComponentToTransformation={addComponentToTransformation} />}></Route>
+    <Route path="*" element={<NF addComponentToTransformation={addComponentToTransformation}></NF>}></Route>
+</Routes>
+
+</Router>
+         
           <Transformation to={"hun"} components={components} />
      
  
