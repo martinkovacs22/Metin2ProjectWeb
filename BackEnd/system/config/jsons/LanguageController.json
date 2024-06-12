@@ -1,69 +1,79 @@
 {
-    "eng": {
+  "eng": {
       "phpSignup": ["SignUP", "username", "password", "password", "email", "full name", "social id", "phone number", "address", "zipcode", "Submit"],
       "navbar": ["Language", "Setting", "Home", "About", "Ranglist", "Search"],
       "home": [],
-      "sign": []
-    },
-    "por": {
+      "sign": [],
+      "NF": ["Few secod change page to home", "404 Not found the page"]
+  },
+  "por": {
       "phpSignup": ["Inscrever-se", "nome de usuário", "senha", "senha", "e-mail", "nome completo", "identificação social", "número de telefone", "endereço", "código postal", "Enviar"],
       "navbar": ["Idioma", "Configuração", "Página inicial", "Sobre", "Classificação", "Pesquisa"],
       "home": [],
-      "sign": []
-    },
-    "spa": {
+      "sign": [],
+      "NF": ["Few secod change page to home", "404 Página não encontrada"]
+  },
+  "spa": {
       "phpSignup": ["Registrarse", "nombre de usuario", "contraseña", "contraseña", "correo electrónico", "nombre completo", "identificación social", "número de teléfono", "dirección", "código postal", "Enviar"],
       "navbar": ["Idioma", "Configuración", "Inicio", "Sobre nosotros", "Clasificación", "Buscar"],
       "home": [],
-      "sign": []
-    },
-    "fra": {
+      "sign": [],
+      "NF": ["Pocos segundos cambian la página a inicio", "404 No se encontró la página"]
+  },
+  "fra": {
       "phpSignup": ["S'inscrire", "nom d'utilisateur", "mot de passe", "mot de passe", "e-mail", "nom complet", "identifiant social", "numéro de téléphone", "adresse", "code postal", "Soumettre"],
       "navbar": ["Langue", "Réglage", "Accueil", "À propos", "Classement", "Recherche"],
       "home": [],
-      "sign": []
-    },
-    "ger": {
+      "sign": [],
+      "NF": ["Quelques secondes changent la page vers l'accueil", "404 Page non trouvée"]
+  },
+  "ger": {
       "phpSignup": ["Anmelden", "Benutzername", "Passwort", "Passwort", "E-Mail", "voller Name", "soziale ID", "Telefonnummer", "Adresse", "Postleitzahl", "Einreichen"],
       "navbar": ["Sprache", "Einstellung", "Zuhause", "Über", "Rangliste", "Suche"],
       "home": [],
-      "sign": []
-    },
-    "rom": {
+      "sign": [],
+      "NF": ["Ein paar Sekunden ändern die Seite zu Startseite", "404 Seite nicht gefunden"]
+  },
+  "rom": {
       "phpSignup": ["Înregistrare", "nume de utilizator", "parolă", "parolă", "e-mail", "nume complet", "ID social", "număr de telefon", "adresă", "cod poștal", "Trimite"],
       "navbar": ["Limbă", "Setare", "Acasă", "Despre", "Clasament", "Căutare"],
       "home": [],
-      "sign": []
-    },
-    "pol": {
+      "sign": [],
+      "NF": ["Câteva secunde schimbă pagina la acasă", "404 Pagina nu a fost găsită"]
+  },
+  "pol": {
       "phpSignup": ["Zarejestruj się", "nazwa użytkownika", "hasło", "hasło", "e-mail", "pełne imię i nazwisko", "identyfikator społeczny", "numer telefonu", "adres", "kod pocztowy", "Prześlij"],
       "navbar": ["Język", "Ustawienia", "Strona główna", "O nas", "Ranking", "Szukaj"],
       "home": [],
-      "sign": []
-    },
-    "ita": {
+      "sign": [],
+      "NF": ["Kilka sekund zmienia stronę na główną", "404 Strona nie znaleziona"]
+  },
+  "ita": {
       "phpSignup": ["Iscriviti", "nome utente", "password", "password", "e-mail", "nome completo", "ID sociale", "numero di telefono", "indirizzo", "codice postale", "Invia"],
       "navbar": ["Lingua", "Impostazione", "Casa", "Informazioni", "Classifica", "Ricerca"],
       "home": [],
-      "sign": []
-    },
-    "cze": {
+      "sign": [],
+      "NF": ["Alcuni secondi cambiano la pagina a casa", "404 Pagina non trovata"]
+  },
+  "cze": {
       "phpSignup": ["Zaregistrovat se", "uživatelské jméno", "heslo", "heslo", "e-mail", "celé jméno", "sociální ID", "telefonní číslo", "adresa", "PSČ", "Odeslat"],
       "navbar": ["Jazyk", "Nastavení", "Domov", "O nás", "Žebříček", "Hledat"],
       "home": [],
-      "sign": []
-    },
-    "hun": {
+      "sign": [],
+      "NF": ["Několik sekund mění stránku na domovskou", "404 Stránka nebyla nalezena"]
+  },
+  "hun": {
       "phpSignup": ["Regisztráció", "felhasználónév", "jelszó", "jelszó", "e-mail", "teljes név", "társadalmi azonosító", "telefonszám", "cím", "irányítószám", "Küldés"],
       "navbar": ["Nyelv", "Beállítás", "Főoldal", "Rólunk", "Ranglista", "Keresés"],
       "home": [],
-      "sign": []
-    },
-    "tur": {
+      "sign": [],
+      "NF": ["Néhány másodperc múlva a kezdőlapra lép", "404 Az oldal nem található"]
+  },
+  "tur": {
       "phpSignup": ["Kayıt ol", "kullanıcı adı", "şifre", "şifre", "e-posta", "tam ad", "sosyal kimlik", "telefon numarası", "adres", "posta kodu", "Gönder"],
       "navbar": ["Dil", "Ayar", "Ana Sayfa", "Hakkında", "Sıralama", "Arama"],
       "home": [],
-      "sign": []
-    }
+      "sign": [],
+      "NF": ["Birkaç saniye sonra ana sayfaya geçiyor", "404 Sayfa bulunamadı"]
   }
-  
+}
