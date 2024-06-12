@@ -26,6 +26,18 @@ class LanguageController{
         self::$res->setBody($change);
         self::$res->send();
     }
+    public static function getAllLanguage(){
+        self::$res = new Res();
+
+        $languageJsonController = Language::getInc();
+        
+
+        $change = $languageJsonController->getAllLanguage();
+        $change["err"] ? self::$res->setStatus_code(HttpStatus::NOT_FOUND) : self::$res->setStatus_code(HttpStatus::OK);
+        self::$res->setBody($change);
+        self::$res->send();
+    }
+
 
 }
 

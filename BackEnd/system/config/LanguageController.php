@@ -24,6 +24,19 @@ class LanguageController
         LanguageController::$components = json_decode(file_get_contents(__DIR__ . "/jsons/LanguageController.json"), true);
     }
 
+    public static function getAllLanguage(){
+        if(LanguageController::$components == null){
+            return array("err"=>true,"data"=>"Nincs Beolvasott adat");
+        }else{
+            $array = [];
+            foreach (LanguageController::$components as $key => $value) {
+            array_push($array,$key);
+            }
+            return array("err"=>false,"data"=>$array);
+           
+        }
+    }
+
 
     public static function change(string $from, string $to, array $components)
     {
