@@ -15,63 +15,61 @@ function replaceTextRecursively(element, from, to) {
 }
 
 const Transformation = ({ to, components }) => {
-    const [isSetLanguage, setIsSetLanguage] = useState(false);
-    const [initialLanguage, setInitialLanguage] = useState("eng");
+    const [firstChange, setFirstChange] = useState(false);
+
     
     useEffect(() => {
         const body = document.body;
         localStorage.setItem("baseLanguage", "eng");
 
         const baseLanguage = localStorage.getItem("baseLanguage") || "eng";
+        const state = {
+            to: null,
+            from: null,
+            components: null
+        };
+        const changeLanguage = async (fromLang, toLang) => {
+            state.from = fromLang;
+            state.to = toLang;
+            state.components = components;
+            if (fromLang && toLang && Array.isArray(state.components) && state.components.lenght !== 0) {
+                console.log(state);
+            
+            try {
+                const res = await dataHandler.postDataAndHandle("change", state);
+                console.log("Response from dataHandler:", res);
 
-        if (baseLanguage !== localStorage.getItem("language")) {
-            const state = { from: "eng", to: to, components: components };
-            dataHandler.postDataAndHandle("change", state).then(res => {
-                console.log(res);
-                if (!res.err) {
-                    setInitialLanguage(to)
-                    localStorage.setItem("language",to)
-                    if (!isSetLanguage) {
-                        setIsSetLanguage(true);
-                    }
-                    
+                if (res && res.data && res.data.from && res.data.to) {
+                    components.forEach(component => {
+                        console.log(`Replacing text for component: ${component}`);
+                        console.log(`From: ${res.data.from[component]}`);
+                        console.log(`To: ${res.data.to[component]}`);
+                        replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
+                    });
+                    localStorage.setItem("language", toLang);
+                } else {
+                    console.error("Invalid response structure:", res);
                 }
-                components.forEach(component => {
-                    replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
-                });
-            }).catch(err => {
-                console.log(err);
-            });
-        }
-        
-
-        let fromLanguage = isSetLanguage || (initialLanguage !== localStorage.getItem("language")) ? initialLanguage : baseLanguage;
-
-        const state = { from: fromLanguage, to: to, components: components };
-        console.log(state);
-
-        dataHandler.postDataAndHandle("change", state).then(res => {
-            console.log(res);
-            if (!res.err) {
-                setInitialLanguage(to)
-                localStorage.setItem("language",to)
-                if (!isSetLanguage) {
-                    setIsSetLanguage(true);
-                }
-                
+            } catch (err) {
+                console.log("Error during language change:", err);
             }
-            components.forEach(component => {
-                replaceTextRecursively(body, res.data.from[component], res.data.to[component]);
-            });
-        }).catch(err => {
-            console.log(err);
-        });
+            }
+        };
+
+        if (baseLanguage !== localStorage.getItem("language") && !firstChange ) {
+            changeLanguage("eng",localStorage.getItem("language")).then(()=>{setFirstChange(true)})
+        }
+        else if(localStorage.getItem("language") !== to){
+            changeLanguage(localStorage.getItem("language"),to).then(()=>{setFirstChange(true)})
+        }
+
+        
 
         // Cleanup function if needed
         return () => {
             // Do any cleanup if necessary
         };
-    }, [to, components, isSetLanguage,localStorage.getItem("language")]);
+    }, [to, components, firstChange,localStorage.getItem("language")]);
 
     return null; // As it does not render anything
 };

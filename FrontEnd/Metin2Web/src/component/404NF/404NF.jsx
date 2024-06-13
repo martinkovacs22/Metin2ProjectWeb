@@ -5,10 +5,10 @@ export default function NF({addComponentToTransformation}) {
         addComponentToTransformation({adderComponents:["NF"]});
         setTimeout(()=>{
             window.location.href ="/"
-        },2000)
+        },5000)
     },[])
 
-    return(<div>
+    return(<div className="bg-red-500">
         <h1 className="p-4 font-bold text-5xl">
         404 Not found the page
         </h1>
