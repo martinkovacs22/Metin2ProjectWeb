@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 BackEnd/vendor/
+FrontEnd/Metin2Web/src/assets/about.png
+FrontEnd/Metin2Web/src/assets/route.png
+FrontEnd/Metin2Web/src/assets/setting.png
