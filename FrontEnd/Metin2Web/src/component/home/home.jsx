@@ -13,11 +13,12 @@ export default function Home({ addComponentToTransformation, sideN }) {
 
     return (
         <>
-        <div className="home-background">
-            <SideNavbar addComponentToTransformation={addComponentToTransformation} sideN={sideN} />
-            <div className=" w-[100vw] h-[200vh] bg-brown-light overflow-auto">
+        <SideNavbar addComponentToTransformation={addComponentToTransformation} sideN={sideN} />
+        <div className="home-background  w-[90vw] ml-[10vw] overscroll-none">
+            
+            <div className=" w-[90vw] h-auto bg-brown-light overflow-auto py-[2rem]">
             <div className="grid grid-cols-1 justify-center items-center">
-        <div className="w-[100vw] text-center flex justify-center items-top" > 
+        <div className="w-[90vw] text-center grid justify-center items-top" > 
             <h1 className="bg-white text-5xl font-black w-min my-[3vh] p-[10px] rounded" >Metin 2 Monster</h1>
         </div>
         
