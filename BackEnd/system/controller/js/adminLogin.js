@@ -2,7 +2,7 @@ const adminlogin = document.getElementById("adminlogin");
 const adminpanel = document.getElementById("adminpanel");
 
 window.addEventListener("load",(e)=>{
-    e.preventDefault(s)
+    e.preventDefault()
     if (localStorage.getItem("token") !== null || localStorage.getItem("token") !== undefined) {
         
     
@@ -16,7 +16,7 @@ window.addEventListener("load",(e)=>{
         return res.json()
     }).then(result=>{
         if (!result.err) {
-            
+            localStorage.setItem("token",result.jwt)
             fetch("https://finombanan.v4y.hu/isAdmin",{
                 method:"POST",
                 body:{},
@@ -27,8 +27,8 @@ window.addEventListener("load",(e)=>{
                 return res.json()
             }).then(result=>{
                 if (!result.err && result.data[0].result === 1) {
-                    
-                    
+                    console.log(result);
+                    // localStorage.setItem("token",result)
                     console.log(result);
                     showAdmin()
                 }
@@ -48,9 +48,7 @@ else{
     console.log(localStorage.getItem("token"));
 }
 })
-function sideNavber(params) {
-    console.log("sideNavber");
-}
+
 function showAdmin() {
     localStorage.setItem("expireLogin",Date.now()+5 * 60 * 1000);
     adminlogin.classList.toggle("d-none")
