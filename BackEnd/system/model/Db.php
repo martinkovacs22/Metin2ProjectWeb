@@ -10,15 +10,18 @@ use config\Exception;
             
             try {
                 self::$db = new \PDO($dsn, $dbUser, $dbPass);
+                
             } catch (\PDOException $e) {
+                
                 die("Hiba a kapcsolat létrehozása közben: " . $e->getMessage());
             }
-            
+           
             return self::$db;
         }
         
         
         public static function Call($name, $array, $db) {
+            
             try {
                 $paramKeys = array_keys($array);
                 $paramPlaceholders = implode(', ', array_map(function($key) {
@@ -33,14 +36,16 @@ use config\Exception;
 
             $stmt->execute();
             $resultSet = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
             return array("err" => false, "data" => $resultSet);
 
             } catch (\Throwable $th) {
                 
 
-                Exception::msg(array("err" => true, "data" => $th->getMessage()));
+                return array("err" => true, "data" => $th->getMessage());
        
             }
+            
         }
 
 

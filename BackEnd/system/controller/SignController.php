@@ -26,9 +26,11 @@ class SignController{
 
     public static function login(){
         self::$res = new Res();
+        
+       
         $serviceData = SignService::login(Req::getReqBody());
         self::$res->setBody($serviceData);
-        //print_r($serviceData);
+
         $serviceData["err"] ? self::$res->setStatus_code(HttpStatus::BAD_REQUEST) : self::$res->setStatus_code(HttpStatus::OK);
         self::$res->send();
     }

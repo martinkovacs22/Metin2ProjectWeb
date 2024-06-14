@@ -1,0 +1,9 @@
+.bg-white{
+    background-color: rgb(228, 228, 228) !important;
+}
+.h-100vh{
+    height: 100vh;
+}
+.row{
+    width: 100vw !important;
+}

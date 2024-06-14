@@ -70,40 +70,55 @@ if (Req::getReqMethod() === "POST") {
         // echo"fds";
     }
 } else if (Req::getReqMethod() === "GET") {
-    if ((explode(".", Req::getReqFun())[1] == "png" || explode(".", Req::getReqFun())[1] == "jpg") && file_exists(__DIR__ . "/../img/buttons/" . Req::getReqFun())) {
-        header('Content-type:image/' . explode(".", Req::getReqFun())[1]);
-        readfile(__DIR__ . "/../img/buttons/" . Req::getReqFun());
-    } else {
-        if (file_exists(__DIR__ . '/html/' . Req::getReqFun() . '.html')) {
-            header('Content-Type: text/html; charset=utf-8');
-            $doc = new DOMDocument();
-            $doc->loadHTML(file_get_contents(__DIR__ . '/html/' . Req::getReqFun() . '.html'));
-            echo $doc->saveHTML();
-        } else if (file_exists(__DIR__ . '/js/' . Req::getReqFun() . '.js')) {
-            // Megfelelő HTTP fejléc beállítása a JavaScript típushoz
-            header('Content-Type: application/javascript');
+    $reqFun = Req::getReqFun();
+    $fileExtension = pathinfo($reqFun, PATHINFO_EXTENSION);
+    $fileBaseName = pathinfo($reqFun, PATHINFO_FILENAME);
 
-            // JavaScript fájl tartalmának közvetlen kimenetre írása
-            readfile(__DIR__ . '/js/' . Req::getReqFun() . '.js');
-         
-        } else if (file_exists(__DIR__ . '/css/' . Req::getReqFun() . '.css')) {
-            header('Content-Type: text/css');
-
-            // CSS fájl tartalmának közvetlen kimenetre írása
-            readfile(__DIR__ . '/css/' . Req::getReqFun() . '.css');
-        } else if ((Req::getReqFun() == "main.php" || Req::getReqFun() == "main" || Req::getReqFun() == "") && file_exists(__DIR__ . '/html/baseSideHTML.html')) {
-
-            $doc = new DOMDocument();
-            $doc->loadHTML(file_get_contents(__DIR__ . '/html/baseSideHTML.html'));
-            echo $doc->saveHTML();
-        } else {
-            echo(Req::getReqFun());
-            $doc = new DOMDocument();
-            $doc->loadHTML(file_get_contents(__DIR__ . '/html/404.html'));
-            echo $doc->saveHTML();
-        }
+    // Kép fájlok kezelése (png vagy jpg)
+    if ($fileExtension && ($fileExtension == "png" || $fileExtension == "jpg") && file_exists(__DIR__ . "/../img/buttons/" . $reqFun)) {
+        header('Content-Type: image/' . $fileExtension);
+        readfile(__DIR__ . "/../img/buttons/" . $reqFun);
+        return;
     }
-} else {
+
+    // HTML fájlok kezelése
+    if (file_exists(__DIR__ . '/html/' . $reqFun . '.html')) {
+        header('Content-Type: text/html; charset=utf-8');
+        $doc = new DOMDocument();
+        $doc->loadHTML(file_get_contents(__DIR__ . '/html/' . $reqFun . '.html'));
+        echo $doc->saveHTML();
+        return;
+    }
+
+    // JavaScript fájlok kezelése
+    if (file_exists(__DIR__ . '/js/' . $reqFun . '.js')) {
+        header('Content-Type: application/javascript');
+        readfile(__DIR__ . '/js/' . $reqFun . '.js');
+        return;
+    }
+
+    // CSS fájlok kezelése
+    if (file_exists(__DIR__ . '/css/' . $reqFun . '.css')) {
+        header('Content-Type: text/css');
+        readfile(__DIR__ . '/css/' . $reqFun . '.css');
+        return;
+    }
+
+    // Főoldal kezelése
+    if (($reqFun == "main.php" || $reqFun == "main" || $reqFun == "") && file_exists(__DIR__ . '/html/baseSideHTML.html')) {
+        $doc = new DOMDocument();
+        $doc->loadHTML(file_get_contents(__DIR__ . '/html/baseSideHTML.html'));
+        echo $doc->saveHTML();
+        return;
+    }
+
+    // 404-es oldal kezelése
+    header('Content-Type: text/html; charset=utf-8');
+    $doc = new DOMDocument();
+    $doc->loadHTML(file_get_contents(__DIR__ . '/html/404.html'));
+    echo $doc->saveHTML();
+}
+else {
     header("Content-Type:application/json");
     $logFile = __DIR__ . '/../../change_log.txt';
 

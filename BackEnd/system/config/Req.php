@@ -96,14 +96,15 @@ class Req
 	}
 
 	static public function getReqToken(): string | null
-
 	{
-		$token = null;
-
-		$token = isset(getallheaders()["token"]) ? getallheaders()["token"] : null;
-		// $token = isset(getallheaders()["Token"]) ? getallheaders()["Token"] : null;
+		$headers = getallheaders();
+		$token = isset($headers["token"]) ? $headers["token"] : null;
+		if ($token === null) {
+			$token = isset($headers["Token"]) ? $headers["Token"] : null;
+		}
 		return $token;
 	}
+	
 
 	static public function CONFIG_OPTIMALIZATION()
 

@@ -55,23 +55,28 @@ return $model;
 
   }
   public static function verifyLogin()
-{
-    try {
-        $oldJwt = JWThandler::verifyJWT(Req::getReqToken());
-        if (isset($oldJwt["data"][0]["id"])) {
-            $newJwt = JWThandler::generateJWT($oldJwt["data"]);
-            return array("err" => false, "jwt" => $newJwt);
-        }
-
-        throw new \RuntimeException("Nem jó a verify: hiányzik az 'id' kulcs az adatokban.");
-    } catch (\Throwable $th) {
-        return array("err" => true, "jwt" => null,"data"=>$th->getMessage());
-    }
-}
+  {
+      try {
+          $token = Req::getReqToken();
+          if ($token === null) {
+              throw new \RuntimeException("Token hiányzik a kérésekből.");
+          }
+  
+          $oldJwt = JWThandler::verifyJWT($token);
+          if (isset($oldJwt["data"][0]["id"])) {
+              $newJwt = JWThandler::generateJWT($oldJwt["data"]);
+              return array("err" => false, "jwt" => $newJwt);
+          }
+  
+          throw new \RuntimeException("Nem jó a verify: hiányzik az 'id' kulcs az adatokban.");
+      } catch (\Throwable $th) {
+          return array("err" => true, "jwt" => null, "data" => $th->getMessage());
+      }
+  }
 
   public static function login(array $body)
   {
-
+   
     if (
       isset($body["loginAndEmail"]) &&
       isset($body["password"])
@@ -99,7 +104,7 @@ return $model;
         //   if (array_key_exists("password", $model["data"][0]["password"])) {
       //     unset($model["data"][0]["password"]);
       // }
-
+ 
         $returnValue = array("err" => false, "jwt" => $userJWT,"data"=>$model["data"]);
         return $returnValue;
       } else {

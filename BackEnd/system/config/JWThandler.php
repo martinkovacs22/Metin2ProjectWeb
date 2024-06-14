@@ -28,7 +28,7 @@ class JWThandler{
         return $token;
     }
     // JWT ellenőrzése és dekódolása
-    public static function verifyJWT($token): array|bool {
+    public static function verifyJWT(string $token): array|bool {
         try {
             // JWT dekódolás: token, kulcs, algoritmus
             $decoded = JWT::decode($token, new Key(self::$secret, 'HS256'));
