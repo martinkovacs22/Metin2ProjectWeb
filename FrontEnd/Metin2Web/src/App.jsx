@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Transformation from "./config/transformation.jsx";
 import Home from "./component/home/home.jsx";
 import NF from "./component/404NF/404NF.jsx"
-
+import Discord from "./component/discord/discordIcon.jsx"
 import "./index.css";
 import "./base.css";
 
@@ -51,7 +51,7 @@ function App() {
 </Router>
          
           <Transformation to={language} components={components} />
-     
+          <Discord />
  
     </div>
   );

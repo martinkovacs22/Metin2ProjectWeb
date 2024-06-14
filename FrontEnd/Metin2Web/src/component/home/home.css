@@ -1,0 +1,24 @@
+.home-background {
+    background-image: url("https://finombanan.v4y.hu/icon.png");
+
+    background-size: cover; /* vagy más beállítás, ha szükséges */
+    background-repeat: no-repeat;
+    overflow-x: none;
+    overflow-x: auto;
+    background-position: center;
+    height: 100vh; /* vagy a kívánt méret */
+    width: 100vw; /* vagy a kívánt méret */
+}
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: white; /* A görgetősáv háttere */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    display: none;
+    width: 0;
+    height: 0;
+  }

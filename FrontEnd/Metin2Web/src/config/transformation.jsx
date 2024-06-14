@@ -56,6 +56,12 @@ const Transformation = ({ to, components }) => {
             }
         };
 
+        if (localStorage.getItem("language") == null) {
+            
+            localStorage.setItem("language","eng")
+
+        }
+
         if (baseLanguage !== localStorage.getItem("language") && !firstChange ) {
             changeLanguage("eng",localStorage.getItem("language")).then(()=>{setFirstChange(true)})
         }
