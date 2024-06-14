@@ -16,17 +16,17 @@ class HomeService
     } 
     public static function getAllCharacter():array{
         
-        return ModelR::CallProcedure(array(),"getAllPlayer","player");
+        return ModelR::CallProcedure(array(),"getAllCharacter","player");
         
     } 
     public static function getLastDayOnlinePlayer():array{
         
-        return ModelR::CallProcedure(array(),"getLastDayOnlinePlayer","account");
+        return ModelR::CallProcedure(array(),"getLastDayOnlinePlayer","player");
         
     } 
     public static function getOnlinePlayerNumber():array{
         
-        return ModelR::CallProcedure(array(),"getOnlinePlayerNumber","account");
+        return ModelR::CallProcedure(array(),"getOnlinePlayerNumber","player");
         
     } 
 }
